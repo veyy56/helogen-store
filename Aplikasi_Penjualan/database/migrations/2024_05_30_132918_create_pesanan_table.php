@@ -16,13 +16,10 @@ class CreatePesananTable extends Migration
         Schema::create('pesanans', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
             $table->unsignedBigInteger('category_id');
-            $table->text('description')->nullable();
-            $table->string('image');
-            $table->integer('price');
-            $table->integer('stock');
-            $table->integer('weight');
+            $table->integer('price');  //harga barang
+            $table->integer('jumlah'); //jumlah pesanan
+            $table->integer('total_harga');  //harga x jml pesanan
             $table->timestamps();
         });
     }

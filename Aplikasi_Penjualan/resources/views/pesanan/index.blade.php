@@ -22,7 +22,7 @@
                                 Daftar Pesanan
                             </h4>
                             <div class="float-right">
-                                <a href="{{ route('order.create') }}" class="btn btn-primary btn-sm">Tambah</a>
+                                <a href="{{ route('pesanan.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                             </div>
                         </div>
                         <div class="card-body">
@@ -51,8 +51,8 @@
                                             <th>Produk</th>
                                             <th>Harga</th>
                                             <th>Created At</th>
-                                            <th>Status</th>
-                                            <th>Aksi</th>
+                                            <th>Total Harga</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>

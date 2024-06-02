@@ -60,16 +60,16 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('kategori/{category_id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('kategori/{category_id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-    /* Pesanan */
-    Route::get('pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
-    
-    Route::delete('pesanan/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    /* order */
     Route::get('order', [OrderController::class, 'viewOrder'])->name('report.order');
     Route::get('order/pdf/{daterange}', [OrderController::class, 'orderReportPdf'])->name('report.order_pdf');
     
     // Route::get('create/order', [OrderController::class, 'create'])->name('order.create');
 
     // Pesanan
+    Route::get('pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
+    Route::get('create/pesanan', [PesananController::class, 'create'])->name('pesanan.create');
+
 
     Route::get('create/order', [PesananController::class, 'create'])->name('order.create');
     Route::post('create/order', [PesananController::class, 'store'])->name('order.store');
