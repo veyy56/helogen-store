@@ -60,10 +60,10 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('kategori/{category_id}', [CategoryController::class, 'update'])->name('category.update');
     Route::delete('kategori/{category_id}', [CategoryController::class, 'destroy'])->name('category.destroy');
 
-    /* Order */
-    Route::get('order/index', [OrderController::class, 'index'])->name('order.index');
+    /* Pesanan */
+    Route::get('pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
     
-    Route::delete('order/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
+    Route::delete('pesanan/destroy/{id}', [OrderController::class, 'destroy'])->name('order.destroy');
     Route::get('order', [OrderController::class, 'viewOrder'])->name('report.order');
     Route::get('order/pdf/{daterange}', [OrderController::class, 'orderReportPdf'])->name('report.order_pdf');
     

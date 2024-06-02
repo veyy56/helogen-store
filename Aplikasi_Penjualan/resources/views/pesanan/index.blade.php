@@ -3,14 +3,14 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>order</h1>
+    <h1>Pesanan</h1>
 @stop
 
 @section('content')
 <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
-        <li class="breadcrumb-item active">Orders</li>
+        <li class="breadcrumb-item active">Pesanan</li>
     </ol>
     <div class="container-fluid">
         <div class="animated fadeIn">
@@ -19,7 +19,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                Daftar Order
+                                Daftar Pesanan
                             </h4>
                             <div class="float-right">
                                 <a href="{{ route('order.create') }}" class="btn btn-primary btn-sm">Tambah</a>
@@ -58,7 +58,7 @@
                                     <tbody>
                                         <!-- LOOPING DATA TERSEBUT MENGGUNAKAN FORELSE -->
                                         <!-- ADAPUN PENJELASAN ADA PADA ARTIKEL SEBELUMNYA -->
-                                        @forelse ($orders as $row)
+                                        @forelse ($product as $row)
                                         <tr>
                                             <td>
                                                 <!-- TAMPILKAN GAMBAR DARI FOLDER PUBLIC/STORAGE/PRODUCTS -->
@@ -94,7 +94,7 @@
                                     </tbody>
                                 </table>
                             </div>
-                            {!! $orders->links() !!}
+                            {!! $product->links() !!}
                         </div>
                     </div>
                 </div>

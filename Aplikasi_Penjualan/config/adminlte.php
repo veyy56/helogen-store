@@ -259,9 +259,14 @@ return [
             'url'  => 'auth/product',
             'icon' => 'fas fa-box',
         ],
+        // [
+        //     'text' => 'Order',
+        //     'url'  => 'order/index',
+        //     'icon' => 'fas fa-shopping-cart',
+        // ],
         [
             'text' => 'Pesanan',
-            'url'  => 'order/index',
+            'url'  => 'pesanan/index',
             'icon' => 'fas fa-shopping-cart',
         ],
         [

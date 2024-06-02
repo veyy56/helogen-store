@@ -13,12 +13,12 @@ class PesananController extends Controller
 {
     public function index()
     {
-        $pesanan = pesanan::with(['category'])->orderBy('created_at', 'DESC');
+        $product = Pesanan::with(['category'])->orderBy('created_at', 'DESC');
         if (request()->q != '') {
-            $pesanan = $pesanan->where('name', 'LIKE', '%' . request()->q . '%');
+            $product = $product->where('name', 'LIKE', '%' . request()->q . '%');
         }
-        $pesanan = $pesanan->paginate(10);
-        return view('pesanan.pesanan', compact('pesanan'));
+        $product = $product->paginate(10);
+        return view('pesanan.index', compact('product'));
     }
 
     public function create()
@@ -45,13 +45,13 @@ class PesananController extends Controller
         if ($request->hasFile('image')) {
             //MAKA KITA SIMPAN SEMENTARA FILE TERSEBUT KEDALAM VARIABLE FILE
             $file = $request->file('image');
-            //KEMUDIAN NAMA FILENYA KITA BUAT CUSTOMER DENGAN PERPADUAN TIME DAN SLUG DARI NAMA orders. ADAPUN EXTENSIONNYA KITA GUNAKAN BAWAAN FILE TERSEBUT
+            //KEMUDIAN NAMA FILENYA KITA BUAT CUSTOMER DENGAN PERPADUAN TIME DAN SLUG DARI NAMA PRODUK. ADAPUN EXTENSIONNYA KITA GUNAKAN BAWAAN FILE TERSEBUT
             $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
             //SIMPAN FILENYA KEDALAM FOLDER PUBLIC/PRODUCTS, DAN PARAMETER KEDUA ADALAH NAMA CUSTOM UNTUK FILE TERSEBUT
             $file->storeAs('public/products', $filename);
 
             //SETELAH FILE TERSEBUT DISIMPAN, KITA SIMPAN INFORMASI PRODUKNYA KEDALAM DATABASE
-            $pesanan = Pesanan::create([
+            $product = Pesanan::create([
                 'name' => $request->name,
                 'slug' => $request->name,
                 'category_id' => $request->category_id,
@@ -62,26 +62,26 @@ class PesananController extends Controller
                 'stock' => $request->stock,
                 'status' => $request->status
             ]);
-            //JIKA SUDAH MAKA REDIRECT KE LIST orders
-            return redirect(route('pesanan.index'))->with(['success' => 'orders Baru Ditambahkan']);
+            //JIKA SUDAH MAKA REDIRECT KE LIST PRODUK
+            return redirect(route('product.index'))->with(['success' => 'Produk Baru Ditambahkan']);
         }
     }
 
     public function destroy($id)
     {
-        $pesanan = Pesanan::find($id); //QUERY UNTUK MENGAMBIL DATA orders BERDASARKAN ID
+        $product = Pesanan::find($id); //QUERY UNTUK MENGAMBIL DATA PRODUK BERDASARKAN ID
         //HAPUS FILE IMAGE DARI STORAGE PATH DIIKUTI DENGNA NAMA IMAGE YANG DIAMBIL DARI DATABASE
-        File::delete(storage_path('app/public/products/' . $pesanan->image));
-        //KEMUDIAN HAPUS DATA orders DARI DATABASE
-        $pesanan->delete();
-        //DAN REDIRECT KE HALAMAN LIST orders
-        return redirect(route('pesanan.index'))->with(['success' => 'orders Sudah Dihapus']);
+        File::delete(storage_path('app/public/products/' . $product->image));
+        //KEMUDIAN HAPUS DATA PRODUK DARI DATABASE
+        $product->delete();
+        //DAN REDIRECT KE HALAMAN LIST PRODUK
+        return redirect(route('pesanan.index'))->with(['success' => 'Produk Sudah Dihapus']);
     }
 
     public function massUploadForm()
     {
         $category = Category::orderBy('name', 'DESC')->get();
-        return view('orders.bulk', compact('category'));
+        return view('pesanan.bulk', compact('category'));
     }
 
     public function massUpload(Request $request)
@@ -102,15 +102,15 @@ class PesananController extends Controller
             //ADAPUN PADA DISPATCH KITA MENGIRIMKAN DUA PARAMETER SEBAGAI INFORMASI
             //YAKNI KATEGORI ID DAN NAMA FILENYA YANG SUDAH DISIMPAN
             ProductJob::dispatch($request->category_id, $filename);
-            return redirect()->back()->with(['success' => 'Upload orders Dijadwalkan']);
+            return redirect()->back()->with(['success' => 'Upload Produk Dijadwalkan']);
         }
     }
 
     public function edit($id)
     {
-        $pesanan = Pesanan::find($id); //AMBIL DATA orders TERKAIT BERDASARKAN ID
+        $product = Pesanan::find($id); //AMBIL DATA PRODUK TERKAIT BERDASARKAN ID
         $category = Category::orderBy('name', 'DESC')->get(); //AMBIL SEMUA DATA KATEGORI
-        return view('orders.edit', compact('pesanan', 'category')); //LOAD VIEW DAN PASSING DATANYA KE VIEW
+        return view('pesanan.edit', compact('pesanan', 'category')); //LOAD VIEW DAN PASSING DATANYA KE VIEW
     }
 
     public function update(Request $request, $id)
@@ -125,8 +125,8 @@ class PesananController extends Controller
             'image' => 'nullable|image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
         ]);
 
-        $pesanan = Pesanan::find($id); //AMBIL DATA orders YANG AKAN DIEDIT BERDASARKAN ID
-        $filename = $pesanan->image; //SIMPAN SEMENTARA NAMA FILE IMAGE SAAT INI
+        $product = Pesanan::find($id); //AMBIL DATA PRODUK YANG AKAN DIEDIT BERDASARKAN ID
+        $filename = $product->image; //SIMPAN SEMENTARA NAMA FILE IMAGE SAAT INI
 
         //JIKA ADA FILE GAMBAR YANG DIKIRIM
         if ($request->hasFile('image')) {
@@ -135,11 +135,11 @@ class PesananController extends Controller
             //MAKA UPLOAD FILE TERSEBUT
             $file->storeAs('public/products', $filename);
             //DAN HAPUS FILE GAMBAR YANG LAMA
-            File::delete(storage_path('app/public/products/' . $pesanan->image));
+            File::delete(storage_path('app/public/products/' . $product->image));
         }
 
-    //KEMUDIAN UPDATE orders TERSEBUT
-        $pesanan->update([
+    //KEMUDIAN UPDATE PRODUK TERSEBUT
+        $product->update([
             'name' => $request->name,
             'description' => $request->description,
             'category_id' => $request->category_id,
@@ -147,6 +147,6 @@ class PesananController extends Controller
             'weight' => $request->weight,
             'image' => $filename
         ]);
-        return redirect(route('orders.index'))->with(['success' => 'Data orders Diperbaharui']);
+        return redirect(route('pesanan.index'))->with(['success' => 'Data Produk Diperbaharui']);
     }
 }

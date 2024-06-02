@@ -47,43 +47,6 @@ active
                     <ul class="list">
                         <li><a class="active" href="#"><span>Kategori</span> : {{ $product->category->name }}</a></li>
                         <li><a href="#"><span>Stok</span> : {{ $product->stock }}</a></li>
-                        <li>
-                            @if(Auth::guard('costumer')->check())
-                                <form action="{{ route('home.addcart') }}" method="post">
-                                    @csrf
-                                    <label for="qty"><span>Quantity</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                                        <div class="product_count">
-                                            <input type="hidden" name="customer_id" value="{{ Auth::guard('costumer')->user()->id }}">
-                                            <input type="hidden" name="product_id" value="{{ $product->id}}">
-                                            <input type="hidden" name="cart_price" value="{{ $product->price}}">
-                                            <input type="hidden" name="cart_weight" value="{{ $product->weight}}">
-                                                <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                                class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                                <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                                class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                        </div>
-                                    <hr>
-                                        <button class="button primary-btn" type="submit">Add to cart</button>
-                                        @if (session('success'))
-                                        <div class="alert alert-success mt-2">{{ session('success') }}</div>
-                                        @endif
-                                </form>
-                            @else
-                                <label for="qty"><span>Quantity</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;:</label>
-                                <div class="product_count">
-                                        <input type="text" name="qty" id="sst" maxlength="12" value="1" title="Quantity:" class="input-text qty">
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
-                                        class="increase items-count" type="button"><i class="lnr lnr-chevron-up"></i></button>
-                                        <button onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
-                                        class="reduced items-count" type="button"><i class="lnr lnr-chevron-down"></i></button>
-                                </div>
-
-                        </li>
-                            <hr>
-                            <!-- pemesanan dan harus login -->
-                            <!-- <a class="button primary-btn" href=" {{ route('costumer.login')}} " >Add to cart</a> -->
-                            @endif
                     </ul>
                 </div>
             </div>
