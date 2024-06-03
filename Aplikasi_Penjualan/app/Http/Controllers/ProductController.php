@@ -37,7 +37,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id', //CATEGORY_ID KITA CEK HARUS ADA DI TABLE CATEGORIES DENGAN FIELD ID
             'price' => 'required|integer',
             'weight' => 'required|integer',
-            'stock' => 'required|integer',
+            'stock' => 'required|string|max:255',
             'image' => 'required|image|mimes:png,jpeg,jpg' //GAMBAR DIVALIDASI HARUS BERTIPE PNG,JPG DAN JPEG
         ]);
 

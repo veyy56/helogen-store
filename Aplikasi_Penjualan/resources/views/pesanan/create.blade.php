@@ -15,8 +15,8 @@
     <div class="container-fluid">
         <div class="animated fadeIn">
           
-          	<!-- TAMBAHKAN ENCTYPE="" KETIKA MENGIRIMKAN FILE PADA FORM -->
-            <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data" >
+            <!-- TAMBAHKAN ENCTYPE="" KETIKA MENGIRIMKAN FILE PADA FORM -->
+            <form action="{{ route('pesanan.store') }}" method="post" enctype="multipart/form-data">
                 @csrf
                 <div class="row">
                     <div class="col-md-8">
@@ -42,8 +42,8 @@
                                     <!-- DATA KATEGORI DIGUNAKAN DISINI, SEHINGGA SETIAP PRODUK USER BISA MEMILIH KATEGORINYA -->
                                     <select name="category_id" class="form-control">
                                         <option value="">Pilih</option>
-                                        @foreach ($category as $row)
-                                        <option value="{{ $row->id }}" {{ old('category_id') == $row->id ? 'selected':'' }}>{{ $row->name }}</option>
+                                        @foreach ($categories as $category)
+                                        <option value="{{ $category->id }}" {{ old('category_id') == $category->id ? 'selected':'' }}>{{ $category->name }}</option>
                                         @endforeach
                                     </select>
                                     <p class="text-danger">{{ $errors->first('category_id') }}</p>
@@ -59,8 +59,8 @@
                                     <p class="text-danger">{{ $errors->first('jumlah') }}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label for="total">Total Harga</label>
-                                    <input type="number" id="total" class="form-control" value="0" readonly>
+                                    <label for="total_harga">Total Harga</label>
+                                    <input type="number" id="total_harga" class="form-control" value="0" readonly>
                                 </div>
 
                                 <div class="form-group">
@@ -99,13 +99,12 @@
         // Menghitung total harga
         var total = harga * jumlah;
         
-        // Menetapkan nilai total harga ke input dengan id 'total'
-        document.getElementById('total').value = total.toFixed(0);
+        // Menetapkan nilai total harga ke input dengan id 'total_harga'
+        document.getElementById('total_harga').value = total.toFixed(0);
     }
     
     // Memanggil fungsi hitungTotalHarga() saat nilai harga atau jumlah diubah
     document.getElementsByName('price')[0].addEventListener('input', hitungTotalHarga);
     document.getElementsByName('jumlah')[0].addEventListener('input', hitungTotalHarga);
-</script>
-
+    </script>
 @stop

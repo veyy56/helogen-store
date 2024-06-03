@@ -11,7 +11,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\OrderController as EcommerceOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
-use App\Models\OrderDetail;
+// use App\Models\OrderDetail;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,11 +69,10 @@ Route::group(['middleware' => ['auth']], function () {
     // Pesanan
     Route::get('pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('create/pesanan', [PesananController::class, 'create'])->name('pesanan.create');
+    // Route::post('create/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
 
 
-    Route::get('create/order', [PesananController::class, 'create'])->name('order.create');
-    Route::post('create/order', [PesananController::class, 'store'])->name('order.store');
-    Route::delete('pesanan/{product_id}', [PesananController::class, 'destroy'])->name('pesanan.destroy');
 
 });
 
@@ -88,7 +87,7 @@ Route::prefix('/costumer')->name('costumer.')->namespace('Costumer')->group(func
 
 
 /* costumer after login */
-Route::group(['middelware' => 'costumer'], function () {
+// Route::group(['middelware' => 'costumer'], function () {
     Route::get('/costumer/home', [HomeController::class, 'index'])->name('home.index');
     Route::get('/costumer/produk', [HomeController::class, 'product'])->name('home.product');
     Route::get('/costumer/category/{slug}', [HomeController::class,'categoryProduct'])->name('home.category');
@@ -113,4 +112,4 @@ Route::group(['middelware' => 'costumer'], function () {
 
     Route::get('/cities/{id}', [CartController::class, 'getCity']);
 
-});
+// });

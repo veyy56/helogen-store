@@ -19,11 +19,11 @@
                     <div class="card">
                         <div class="card-header">
                             <h4 class="card-title">
-                                List Product
-                                <div class="float-right">
+                                List Produk Katalog                                
+                            </h4>
+                            <div class="float-right">
                                     <a href="{{ route('product.create') }}" class="btn btn-primary btn-sm">Tambah</a>
                                 </div>
-                            </h4>
                         </div>
                         <div class="card-body">
                             <!-- JIKA TERDAPAT FLASH SESSION, MAKA TAMPILAKAN -->
@@ -82,6 +82,7 @@
                                             <!-- KARENA BERISI HTML MAKA KITA GUNAKAN { !! UNTUK MENCETAK DATA -->
                                             <td>{!! $row->status_label !!}</td>
                                             <td>
+                                                
                                                 <!-- FORM UNTUK MENGHAPUS DATA PRODUK -->
                                                 <form action="{{ route('product.destroy', $row->id) }}" method="post">
                                                     @csrf

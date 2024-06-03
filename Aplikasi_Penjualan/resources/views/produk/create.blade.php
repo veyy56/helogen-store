@@ -75,7 +75,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="stock">Stok</label>
-                                    <input type="number" name="stock" class="form-control" value="{{ old('stock') }}" required>
+                                    <input type="text" name="stock" class="form-control" value="{{ old('stock') }}" required>
                                     <p class="text-danger">{{ $errors->first('stock') }}</p>
                                 </div>
                                 <div class="form-group">

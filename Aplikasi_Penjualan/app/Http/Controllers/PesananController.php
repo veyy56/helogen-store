@@ -3,11 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use App\Models\Pesanan;
 use App\Models\Category;
-use Illuminate\Support\Facades\File;
-use App\Jobs\ProductJob;
 
 class PesananController extends Controller
 {
@@ -23,130 +20,54 @@ class PesananController extends Controller
 
     public function create()
     {
-        $category = Category::orderBy('name', 'DESC')->get();
-
-        return view('pesanan.create', compact('category'));
+        $categories = Category::orderBy('name', 'DESC')->get();
+        return view('pesanan.create', compact('categories'));
     }
 
     public function store(Request $request)
     {
-        //VALIDASI REQUESTNYA
-        $this->validate($request, [
+        // Validate the request data
+        $request->validate([
             'name' => 'required|string|max:100',
-            'description' => 'required',
-            'category_id' => 'required|exists:categories,id', //CATEGORY_ID KITA CEK HARUS ADA DI TABLE CATEGORIES DENGAN FIELD ID
+            'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
-            'weight' => 'required|integer',
-            'stock' => 'required|integer',
-            'image' => 'required|image|mimes:png,jpeg,jpg' //GAMBAR DIVALIDASI HARUS BERTIPE PNG,JPG DAN JPEG
+            'jumlah' => 'required|integer',
         ]);
 
-        //JIKA FILENYA ADA
-        if ($request->hasFile('image')) {
-            //MAKA KITA SIMPAN SEMENTARA FILE TERSEBUT KEDALAM VARIABLE FILE
-            $file = $request->file('image');
-            //KEMUDIAN NAMA FILENYA KITA BUAT CUSTOMER DENGAN PERPADUAN TIME DAN SLUG DARI NAMA PRODUK. ADAPUN EXTENSIONNYA KITA GUNAKAN BAWAAN FILE TERSEBUT
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            //SIMPAN FILENYA KEDALAM FOLDER PUBLIC/PRODUCTS, DAN PARAMETER KEDUA ADALAH NAMA CUSTOM UNTUK FILE TERSEBUT
-            $file->storeAs('public/products', $filename);
+        // Save the order
+        Pesanan::create([
+            'name' => $request->name,
+            'category_id' => $request->category_id,
+            'price' => $request->price,
+            'jumlah' => $request->jumlah,
+            'total_harga' => $request->price * $request->jumlah,
+        ]);
 
-            //SETELAH FILE TERSEBUT DISIMPAN, KITA SIMPAN INFORMASI PRODUKNYA KEDALAM DATABASE
-            $product = Pesanan::create([
-                'name' => $request->name,
-                'slug' => $request->name,
-                'category_id' => $request->category_id,
-                'description' => $request->description,
-                'image' => $filename, //PASTIKAN MENGGUNAKAN VARIABLE FILENAM YANG HANYA BERISI NAMA FILE SAJA (STRING)
-                'price' => $request->price,
-                'weight' => $request->weight,
-                'stock' => $request->stock,
-                'status' => $request->status
-            ]);
-            //JIKA SUDAH MAKA REDIRECT KE LIST PRODUK
-            return redirect(route('product.index'))->with(['success' => 'Produk Baru Ditambahkan']);
-        }
+        return redirect(route('pesanan.index'))->with('success', 'Produk Pesan Ditambahkan');
     }
 
     public function destroy($id)
     {
-        $product = Pesanan::find($id); //QUERY UNTUK MENGAMBIL DATA PRODUK BERDASARKAN ID
-        //HAPUS FILE IMAGE DARI STORAGE PATH DIIKUTI DENGNA NAMA IMAGE YANG DIAMBIL DARI DATABASE
-        File::delete(storage_path('app/public/products/' . $product->image));
-        //KEMUDIAN HAPUS DATA PRODUK DARI DATABASE
-        $product->delete();
-        //DAN REDIRECT KE HALAMAN LIST PRODUK
-        return redirect(route('pesanan.index'))->with(['success' => 'Produk Sudah Dihapus']);
+        // Add your destroy logic here if needed
     }
 
     public function massUploadForm()
     {
-        $category = Category::orderBy('name', 'DESC')->get();
-        return view('pesanan.bulk', compact('category'));
+        // Add your mass upload form logic here if needed
     }
 
     public function massUpload(Request $request)
     {
-    //VALIDASI DATA YANG DIKIRIM
-        $this->validate($request, [
-            'category_id' => 'required|exists:categories,id',
-            'file' => 'required|mimes:xlsx' //PASTIKAN FORMAT FILE YANG DITERIMA ADALAH XLSX
-        ]);
-
-        //JIKA FILE-NYA ADA
-        if ($request->hasFile('file')) {
-            $file = $request->file('file');
-            $filename = time() . '-pesanan.' . $file->getClientOriginalExtension();
-            $file->storeAs('public/uploads', $filename); //MAKA SIMPAN FILE TERSEBUT DI STORAGE/APP/PUBLIC/UPLOADS
-
-            //BUAT JADWAL UNTUK PROSES FILE TERSEBUT DENGAN MENGGUNAKAN JOB
-            //ADAPUN PADA DISPATCH KITA MENGIRIMKAN DUA PARAMETER SEBAGAI INFORMASI
-            //YAKNI KATEGORI ID DAN NAMA FILENYA YANG SUDAH DISIMPAN
-            ProductJob::dispatch($request->category_id, $filename);
-            return redirect()->back()->with(['success' => 'Upload Produk Dijadwalkan']);
-        }
+        // Add your mass upload logic here if needed
     }
 
     public function edit($id)
     {
-        $product = Pesanan::find($id); //AMBIL DATA PRODUK TERKAIT BERDASARKAN ID
-        $category = Category::orderBy('name', 'DESC')->get(); //AMBIL SEMUA DATA KATEGORI
-        return view('pesanan.edit', compact('pesanan', 'category')); //LOAD VIEW DAN PASSING DATANYA KE VIEW
+        // Add your edit logic here if needed
     }
 
     public function update(Request $request, $id)
     {
-    //VALIDASI DATA YANG DIKIRIM
-        $this->validate($request, [
-            'name' => 'required|string|max:100',
-            'description' => 'required',
-            'category_id' => 'required|exists:categories,id',
-            'price' => 'required|integer',
-            'weight' => 'required|integer',
-            'image' => 'nullable|image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
-        ]);
-
-        $product = Pesanan::find($id); //AMBIL DATA PRODUK YANG AKAN DIEDIT BERDASARKAN ID
-        $filename = $product->image; //SIMPAN SEMENTARA NAMA FILE IMAGE SAAT INI
-
-        //JIKA ADA FILE GAMBAR YANG DIKIRIM
-        if ($request->hasFile('image')) {
-            $file = $request->file('image');
-            $filename = time() . Str::slug($request->name) . '.' . $file->getClientOriginalExtension();
-            //MAKA UPLOAD FILE TERSEBUT
-            $file->storeAs('public/products', $filename);
-            //DAN HAPUS FILE GAMBAR YANG LAMA
-            File::delete(storage_path('app/public/products/' . $product->image));
-        }
-
-    //KEMUDIAN UPDATE PRODUK TERSEBUT
-        $product->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'category_id' => $request->category_id,
-            'price' => $request->price,
-            'weight' => $request->weight,
-            'image' => $filename
-        ]);
-        return redirect(route('pesanan.index'))->with(['success' => 'Data Produk Diperbaharui']);
+        // Add your update logic here if needed
     }
 }
