@@ -44,30 +44,6 @@
             @endif
             </ul>
 
-            <!-- <ul class="nav-shop">
-
-              @if(Auth::guard('costumer')->check())
-                    <li class="nav-item"><button><a href=" {{route('home.orderdetail')}} "><i class="ti-list"></i></a></button></li>
-                    <li class="nav-item"><button><a href=" {{route('home.list_cart')}} "><i class="ti-shopping-cart"></i></a><span class="nav-shop__circle"> {{$cart->count()}} </span></button> </li>
-
-                    <li class="nav-item submenu dropdown">
-                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true"
-                          aria-expanded="false">{{ Auth::guard('costumer')->user()->name }}</a>
-                          <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <ul class="dropdown-menu">
-                                <li class="nav-item"><a class="nav-link" href="{{ route('costumer.logout') }}" onclick="event.preventDefault();
-                                    this.closest('form').submit();"> {{ __('Logout') }}</a></li>
-                            </ul>
-                          </form>
-                    </li>
-                </div>
-            @else
-                <li class="nav-item"><button><i class="ti-list"></i></button></li>
-                <li class="nav-item"><button><a href="cart"><i class="ti-shopping-cart"></i></a></span></button> </li>
-                <li class="nav-item"><a class="button button-header" href="{{ route('costumer.login') }}">Login</a></li>
-            @endif
-            </ul> -->
           </div>
         </div>
       </nav>
@@ -86,13 +62,11 @@
 				<div class="row section_gap">
 					<div class="col-lg-3 col-md-6 col-sm-6">
 						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title large_title">Our Mission</h4>
+							<h4 class="footer_title large_title">Helogen Store</h4>
 							<p>
-								Memperkenalkan produk asli Majalengka kepada Indonesia, dengan kualitas terbaik.
+              Helogen Store Purwokerto - Destinasi utama untuk fashion urban kekinian. Temukan koleksi eksklusif kaos, hoodie, jaket, dan aksesoris berkualitas tinggi yang mencerminkan kreativitas Anda. Kunjungi kami dan temukan gaya yang sesuai dengan kepribadian Anda.
 							</p>
-							<p>
-								Memperkenalkan produk lokal dengan kualitas internasional.
-							</p>
+							
 						</div>
 					</div>
 					<div class="offset-lg-1 col-lg-2 col-md-6 col-sm-6">
@@ -116,12 +90,19 @@
 						</div>
 					</div>
 					<div class="offset-lg-1 col-lg-3 col-md-6 col-sm-6">
-						<div class="single-footer-widget tp_widgets">
-							<h4 class="footer_title">Contact Us</h4>
-							<div class="ml-40">
+            <div class="single-footer-widget tp_widgets">
+              <h4 class="footer_title">Contact Us</h4>
+              <div class="ml-20 contact-info">
+                <span class="contact-info__icon"><i class="ti-headphone"></i></span>
+                <p>+62 895421946675 </p> <br>
+              </div>
+              <div class="ml-20 contact-info"><br>
+                <span class="contact-info__icon"><i class="ti-instagram"></i></span>
+                <p>@helogen.co </p>
+              </div>
+            </div>
+          </div>
 
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
@@ -132,7 +113,7 @@
 				<div class="row d-flex">
 					<p class="col-lg-12 footer-text text-center">
 						<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-        Copyright &copy;<script>document.write(new Date().getFullYear());</script> All rights reserved | This template is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+            <i class="fa fa-store" aria-hidden="true"></i> Helogen Store Purwokerto &copy;<script>document.write(new Date().getFullYear());</script></i>
         <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 				</div>
 			</div>

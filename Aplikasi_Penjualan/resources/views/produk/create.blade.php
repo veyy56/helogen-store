@@ -73,9 +73,16 @@
                                     <input type="number" name="weight" class="form-control" value="{{ old('weight') }}" required>
                                     <p class="text-danger">{{ $errors->first('weight') }}</p>
                                 </div>
-                                <div class="form-group">
+                                <!-- <div class="form-group">
                                     <label for="stock">Stok</label>
                                     <input type="text" name="stock" class="form-control" value="{{ old('stock') }}" required>
+                                    <p class="text-danger">{{ $errors->first('stock') }}</p>
+                                </div> -->
+                                <div class="form-group">
+                                    <label for="stock">Stok</label>
+                                    <select name="stock" class="form-control" required>
+                                        <option value="ready" {{ old('stock') == 'ready' ? 'selected' : '' }}>Ready</option>
+                                    </select>
                                     <p class="text-danger">{{ $errors->first('stock') }}</p>
                                 </div>
                                 <div class="form-group">

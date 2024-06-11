@@ -22,10 +22,9 @@
           </div>
           <div class="col-sm-7 col-lg-6 offset-lg-1 pl-4 pl-md-5 pl-lg-0">
             <div class="hero-banner__content">
-              <h4>Shop is fun</h4>
-              <h1>Browse Our Premium Product</h1>
-              <p>Us which over of signs divide dominion deep fill bring they're meat beho upon own earth without morning over third. Their male dry. They are great appear whose land fly grass.</p>
-              <a class="button button-hero" href=" {{route('home.product')}} ">Browse Now</a>
+              <h1>Helogen Store Purwokerto</h1>
+              <p>Selamat datang di Helogen Store Purwokerto. Kami menawarkan koleksi fashion eksklusif mulai dari kaos, hoodie, jaket, hingga aksesoris yang dirancang untuk mencerminkan kreativitas dan individualitas Anda. Kunjungi toko kami dan temukan koleksi yang sesuai dengan kepribadian Anda.</p>
+              <a class="button button-hero" href=" {{ route('front.product') }} ">Browse Now</a>
             </div>
           </div>
         </div>
@@ -65,7 +64,7 @@
     <section class="section-margin calc-60px">
       <div class="container">
         <div class="section-intro pb-60px">
-          <p>Tampil trendi dengan produk terbaru kami.</p>
+          <p>Produk Helogen Store Purwokerto</p>
           <h2>Produk <span class="section-intro__style">Terbaru</span></h2>
         </div>
         <div class="row">

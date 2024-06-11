@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Pesanan;
 use App\Models\Category;
 
+use PDF;
+// use App\Models\Order;
+
 class PesananController extends Controller
 {
     public function index()
@@ -17,6 +20,15 @@ class PesananController extends Controller
         $product = $product->paginate(10);
         return view('pesanan.index', compact('product'));
     }
+
+    public function cetakPesanan()
+    {
+        $products = Pesanan::with(['category'])->orderBy('created_at', 'DESC')->get();
+        
+        $pdf = PDF::loadView('orders.order_pdf', compact('products'));
+        return $pdf->download('pesanan.pdf');
+    }
+
 
     public function create()
     {

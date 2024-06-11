@@ -11,6 +11,7 @@ use App\Http\Controllers\Ecommerce\CartController;
 use App\Http\Controllers\Ecommerce\OrderController as EcommerceOrderController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PesananController;
+use App\Http\Controllers\RiwayatController;
 // use App\Models\OrderDetail;
 
 /*
@@ -52,6 +53,10 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk');
     Route::post('product/bulk', [ProductController::class, 'massUpload'])->name('product.saveBulk');
+    // Route::get('/product/search', [ProductController::class, 'search']);
+    // Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+    Route::get('/product/search', [ProductController::class, 'search'])->name('product.search');
+
 
     /* route kategori */
     Route::get('kategori', [CategoryController::class, 'index'])->name('category.index');
@@ -64,6 +69,12 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order', [OrderController::class, 'viewOrder'])->name('report.order');
     Route::get('order/pdf/{daterange}', [OrderController::class, 'orderReportPdf'])->name('report.order_pdf');
     
+    // Laporan pdf
+    // Route::get('/riwayat', [RiwayatController::class, 'index'])->name('laporan.view');
+    // // Route::get('/riwayat/cetak_laporan', [RiwayatController::class, 'exportPdf'])->name('laporan.cetak_laporan');
+
+
+    
     // Route::get('create/order', [OrderController::class, 'create'])->name('order.create');
 
     // Pesanan
@@ -71,9 +82,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('create/pesanan', [PesananController::class, 'create'])->name('pesanan.create');
     // Route::post('create/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
-
-
-
 });
 
 
@@ -84,32 +92,3 @@ Route::prefix('/costumer')->name('costumer.')->namespace('Costumer')->group(func
     Route::post('/logout', [CostumersController::class, 'logout'])->name('logout');
 });
 
-
-
-/* costumer after login */
-// Route::group(['middelware' => 'costumer'], function () {
-    Route::get('/costumer/home', [HomeController::class, 'index'])->name('home.index');
-    Route::get('/costumer/produk', [HomeController::class, 'product'])->name('home.product');
-    Route::get('/costumer/category/{slug}', [HomeController::class,'categoryProduct'])->name('home.category');
-    Route::get('/costumer/product/{slug}', [HomeController::class, 'show'])->name('home.show_product');
-
-    Route::get('/costumer/cart', [CartController::class, 'index'])->name('home.list_cart');
-    Route::get('/costumer/checkout', [EcommerceOrderController::class, 'checkout'])->name('home.checkout');
-    Route::post('/costumer/checkout', [EcommerceOrderController::class, 'processCheckout'])->name('home.checkoutproses');
-    // Route::post('/costumer/ongkir', [CartController::class, 'check_ongkir'])->name('home.cekongkir');
-    Route::post('/costumer/cartadd', [CartController::class, 'addToCart'])->name('home.addcart');
-    Route::patch('/costumer/cartupdate/{cart}', [CartController::class, 'updateCart'])->name('home.update_cart');
-    Route::delete('/costumert/cart/delete/{id}', [CartController::class, 'destroy']);
-
-    Route::get('/costumer/order/{invoice}', [EcommerceOrderController::class, 'index'])->name('home.order');
-    Route::get('/costumer/order-detail', [EcommerceOrderController::class, 'detail'])->name('home.orderdetail');
-    Route::get('/costumer/payment/{invoice}', [EcommerceOrderController::class, 'paymentForm'])->name('home.payment-form');
-    Route::post('/costumer/payment/{invoice}', [EcommerceOrderController::class, 'payment'])->name('home.payment');
-    Route::post('/costummer/order/update/{id}', [EcommerceOrderController::class, 'update'])->name('home.order.update');
-    Route::get('/costumer/pdf/{id}', [EcommerceOrderController::class, 'generatepdf'])->name('home.pdf');
-
-    // Route::get('/costumer/create', [CartController::class, 'coba'])->name('home.coba');
-
-    Route::get('/cities/{id}', [CartController::class, 'getCity']);
-
-// });

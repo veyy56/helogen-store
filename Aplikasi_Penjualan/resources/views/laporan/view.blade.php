@@ -3,11 +3,33 @@
 @section('title', 'Dashboard')
 
 @section('content_header')
-    <h1>Order</h1>
-@stop
-
+<h1>Pesanan</h1>
 @section('content')
-<main class="main">
+
+    <!-- <h1>Riwayat Pesanan</h1>
+    <div class="table-responsive">
+    <a href="{{ route('laporan.exportPdf') }}">Export ke PDF</a>
+    <table border="1">
+        <tr>
+            <th>Nama Produk</th>
+            <th>Kategori</th>
+            <th>Jumlah</th>
+            <th>Harga</th>
+            <th>Total Harga</th>
+        </tr>
+        @foreach($riwayat as $riwayat)
+        <tr>
+            <td>{{ $riwayat->name }}</td>
+            <td>{{ $riwayat->category_id }}</td>
+            <td>{{ $riwayat->price }}</td>
+            <td>{{ $riwayat->jumlah }}</td>
+            <td>{{ $riwayat->total_harga }}</td>
+        </tr>
+        @endforeach
+    </table>
+
+    @endsection -->
+    <main class="main">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">Home</li>
         <li class="breadcrumb-item active">Laporan Order</li>
@@ -31,7 +53,7 @@
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
 
-                            <form action="{{ route('report.order') }}" method="get">
+                            <form action="{{ route('index.exportPdf') }}" method="get">
                                 <div class="input-group mb-3 col-md-4 float-right">
                                     <input type="text" id="created_at" name="date" class="form-control">
                                     <div class="input-group-append">
@@ -46,28 +68,17 @@
                                         <tr>
                                             <th>Nama Produk</th>
                                             <th>Kategori</th>
+                                            <th>jumlah</th>
                                             <th>Harga</th>
-                                            <th>Subtotal</th>
                                             <th>Tanggal</th>
+                                            <th>Total Harga</th>
+                                            
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($orders as $row)
-                                        <tr>
-                                            <td><strong>{{ $row->invoice }}</strong></td>
-                                            <td>
-                                                <strong>{{ $row->customer_name }}</strong><br>
-                                                <label><strong>Telp:</strong> {{ $row->customer_phone }}</label><br>
-                                                <label><strong>Alamat:</strong> {{ $row->customer_address }} {{ $row->customer->district->name }} - {{  $row->citie->name }}, {{  $row->citie->postal_code }}</label>
-                                            </td>
-                                            <td>Rp {{ number_format($row->subtotal) }}</td>
-                                            <td>{{ $row->created_at->format('d-m-Y') }}</td>
-                                        </tr>
-                                        @empty
                                         <tr>
                                             <td colspan="6" class="text-center">Tidak ada data</td>
                                         </tr>
-                                        @endforelse
                                     </tbody>
                                 </table>
                             </div>

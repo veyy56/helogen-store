@@ -39,28 +39,25 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>Nama Produk</th>
-                                            <th>Kategori</th>
-                                            <th>Harga</th>
-                                            <th>Created At</th>
-                                            <th>Total Harga</th>
+                                            <th style="text-align: center;">Nama Produk</th>
+                                            <th style="text-align: center;">Kategori</th>
+                                            <th style="text-align: center;">Jumlah</th>
+                                            <th style="text-align: center;">Harga</th>
+                                            <th style="text-align: center;">Tanggal</th>
+                                            <th style="text-align: center;">Total Harga</th>
                                             
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @forelse ($product as $row)
                                         <tr>
-                                            <td>
-                                                <!-- <strong>{{ $product->firstItem() }}</strong> -->
-                                                <strong>{{ $row->name }}</strong>
-                                                <td>{{$row->category->name }}</span></td>
-
-                                                <td>Rp. {{number_format ($row->price) }}</span></td>
-
-                                                <td>{{$row->created_at->format('d-m-Y') }}</span></td>
-
-                                                <td>{{ $row->total_harga }}</span></td><br>
-                                            </td>
+                                            <td style="text-align: center;">{{ $row->name }}</td>
+                                            <td style="text-align: center;">{{$row->category->name ?? 'N/A'}}</td>
+                                            <td style="text-align: center;">{{ $row->jumlah }}</td>
+                                            <td style="text-align: center;">Rp. {{number_format ($row->price) }}</span></td>
+                                            <td style="text-align: center;">{{$row->created_at->format('d-m-Y') }}</span></td>
+                                            <td style="text-align: center;">Rp. {{number_format ($row->total_harga) }}</span></td><br>
+                                            
                                         </tr>
                                         @empty
                                             <td colspan="6" class="text-center">Tidak ada data</td>

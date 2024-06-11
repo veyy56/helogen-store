@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\Product;
 use App\Models\Category;
-use App\Models\Cart;
 
 class HomeController extends Controller
 {
@@ -44,4 +43,8 @@ class HomeController extends Controller
         return view('costumer.show', compact('product'));
     }
 
+    // public function map()
+    // {
+    //     return view('costumer.contact');
+    // }
 }

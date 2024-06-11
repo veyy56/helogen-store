@@ -74,11 +74,20 @@
                                     <p class="text-danger">{{ $errors->first('weight') }}</p>
                                 </div>
 
+                                <!-- <div class="form-group">
+                                    <label for="stock">Stok</label>
+                                    <input type="text" name="stock" class="form-control" value="{{ old('stock') }}" required>
+                                    <p class="text-danger">{{ $errors->first('stock') }}</p>
+                                </div> -->
                                 <div class="form-group">
                                     <label for="stock">Stok</label>
-                                    <input type="number" name="stock" class="form-control" value="{{ $product->stock }}" required>
+                                    <select name="stock" class="form-control" required>
+                                        <option value="ready" {{ old('stock') == 'ready' ? 'selected' : '' }}>Ready</option>
+                                        <option value="habis" {{ old('stock') == 'empty' ? 'selected' : '' }}>Kosong</option>
+                                    </select>
                                     <p class="text-danger">{{ $errors->first('stock') }}</p>
                                 </div>
+
 
                               	<!-- GAMBAR TIDAK LAGI WAJIB, JIKA DIISI MAKA GAMBAR AKAN DIGANTI, JIKA DIBIARKAN KOSONG MAKA GAMBAR TIDAK AKAN DIUPDATE -->
                                 <div class="form-group">

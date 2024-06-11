@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Order PDF</title>
+    <title>Pdf Penjualan Helogen</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
 <body>
@@ -13,10 +13,16 @@
     <table width="100%" class="table-hover table-bordered">
         <thead>
             <tr>
-                <th>InvoiceID</th>
+                <!-- <th>InvoiceID</th>
                 <th>Pelanggan</th>
                 <th>Subtotal</th>
+                <th>Tanggal</th> -->
+                <th>Nama Produk</th>
+                <th>Kategori</th>
+                <th>jumlah</th>
+                <th>Harga</th>
                 <th>Tanggal</th>
+                <th>Total Harga</th>
             </tr>
         </thead>
         <tbody>
@@ -36,13 +42,13 @@
                 @php $total += $row->subtotal @endphp
             @empty
             <tr>
-                <td colspan="6" class="text-center">Tidak ada data</td>
+                <td colspan="5" class="text-center">Tidak ada data</td>
             </tr>
             @endforelse
         </tbody>
         <tfoot>
             <tr>
-                <td colspan="2">Total</td>
+                <td colspan="3">Total</td>
                 <td>Rp {{ number_format($total) }}</td>
                 <td></td>
             </tr>

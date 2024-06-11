@@ -40,4 +40,5 @@ class Product extends Model
             'product_id' => $this->id,
         ]);
     }
+    
 }

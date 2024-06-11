@@ -1,4 +1,4 @@
-<!-- @extends('adminlte::page') -->
+@extends('adminlte::page')
 
 @section('title', 'Dashboard')
 
@@ -29,20 +29,7 @@
                                         <strong class="h4">Rp 0</strong>
                                     </div>
                                 </div>
-                                <div class="col-md-3">
-                                    <div class="callout callout-danger">
-                                        <small class="text-muted">Pelanggan Baru (H-7)</small>
-                                        <br>
-                                        <strong class="h4">0</strong>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="callout callout-primary">
-                                        <small class="text-muted">Perlu Dikirim</small>
-                                        <br>
-                                        <strong class="h4">0</strong>
-                                    </div>
-                                </div>
+                                
                                 <div class="col-md-3">
                                     <div class="callout callout-success">
                                         <small class="text-muted">Total Produk</small>

@@ -41,13 +41,13 @@ class OrderController extends Controller
         return view('orders.index', compact('orders'));
     }
 
-    // public function update(Request $request){
-    //     $orders = Order::where('id', $request->id)->update([
-    //         'status' => $request['status']
-    //         ]);
+    public function update(Request $request){
+        $orders = Order::where('id', $request->id)->update([
+            'status' => $request['status']
+            ]);
 
-    //     return redirect(route('order.index'));
-    // }
+        return redirect(route('order.index'));
+    }
 
     public function destroy($id){
         $order = Order::find($id);

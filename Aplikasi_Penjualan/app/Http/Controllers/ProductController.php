@@ -113,6 +113,16 @@ class ProductController extends Controller
         return view('produk.edit', compact('product', 'category')); //LOAD VIEW DAN PASSING DATANYA KE VIEW
     }
 
+    public function search(Request $request){
+        if($request->has('search')){
+            $product = Product::where('name', 'LIKE', '%' . $request->search . '%')->get();
+        }
+        else{
+            $product = Product::all();
+        }
+        return view('produk.produk', compact('product'));
+    }
+
     public function update(Request $request, $id)
     {
     //VALIDASI DATA YANG DIKIRIM
@@ -122,6 +132,7 @@ class ProductController extends Controller
             'category_id' => 'required|exists:categories,id',
             'price' => 'required|integer',
             'weight' => 'required|integer',
+            'stock' => 'required|string|max:100',
             'image' => 'nullable|image|mimes:png,jpeg,jpg' //IMAGE BISA NULLABLE
         ]);
 
@@ -145,6 +156,7 @@ class ProductController extends Controller
             'category_id' => $request->category_id,
             'price' => $request->price,
             'weight' => $request->weight,
+            'stock' => $request->stock,
             'image' => $filename
         ]);
         return redirect(route('product.index'))->with(['success' => 'Data Produk Diperbaharui']);

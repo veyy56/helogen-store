@@ -17,9 +17,6 @@ class CategoryController extends Controller
 
     public function store(Request $request)
     {
-        //JADI KITA VALIDASI DATA YANG DITERIMA, DIMANA NAME CATEGORY WAJIB DIISI
-        //TIPENYA ADA STRING DAN MAX KARATERNYA ADALAH 50 DAN BERSIFAT UNIK
-        //UNIK MAKSUDNYA JIKA DATA DENGAN NAMA YANG SAMA SUDAH ADA MAKA VALIDASINYA AKAN MENGEMBALIKAN ERROR
         $this->validate($request, [
             'name' => 'required|string|max:50|unique:categories'
         ]);
@@ -27,10 +24,6 @@ class CategoryController extends Controller
         //FIELD slug AKAN DITAMBAHKAN KEDALAM COLLECTION $REQUEST
         $request->request->add(['slug' => $request->name]);
 
-        //SEHINGGA PADA BAGIAN INI KITA TINGGAL MENGGUNAKAN $request->except()
-        //YAKNI MENGGUNAKAN SEMUA DATA YANG ADA DIDALAM $REQUEST KECUALI INDEX _TOKEN
-        //FUNGSI REQUEST INI SECARA OTOMATIS AKAN MENJADI ARRAY
-        //CATEGORY::CREATE ADALAH MASS ASSIGNMENT UNTUK MEMBERIKAN INSTRUKSI KE MODEL AGAR MENAMBAHKAN DATA KE TABLE TERKAIT
         Category::create($request->except('_token'));
 
         return redirect(route('category.index'))->with(['success' => 'Kategori Baru Ditambahkan!']);
@@ -48,11 +41,7 @@ class CategoryController extends Controller
 
     public function update(Request $request, $id)
     {
-        //VALIDASI FIELD NAME
-        //YANG BERBEDA ADA TAMBAHAN PADA RULE UNIQUE
-        //FORMATNYA ADALAH unique:nama_table,nama_field,id_ignore
-        //JADI KITA TETAP MENGECEK UNTUK MEMASTIKAN BAHWA NAMA CATEGORYNYA UNIK
-        //AKAN TETAPI KHUSUS DATA DENGAN ID YANG AKAN DIUPDATE DATANYA DIKECUALIKAN
+
         $this->validate($request, [
             'name' => 'required|string|max:50|unique:categories,name,' . $id
         ]);
@@ -72,9 +61,7 @@ class CategoryController extends Controller
 
     public function destroy($id)
     {
-        //Buat query untuk mengambil category berdasarkan id menggunakan method find()
-        //ADAPUN withCount() SERUPA DENGAN EAGER LOADING YANG MENGGUNAKAN with()
-        //HANYA SAJA withCount() RETURNNYA ADALAH INTEGER
+
         //JADI NNTI HASIL QUERYNYA AKAN MENAMBAHKAN FIELD BARU BERNAMA child_count YANG BERISI JUMLAH DATA ANAK KATEGORI
         $category = Category::withCount(['child'])->find($id);
         //JIKA KATEGORI INI TIDAK DIGUNAKAN SEBAGAI PARENT ATAU CHILDNYA = 0

@@ -46,7 +46,7 @@ return [
     */
 
     'logo' => '<b>Helogen</b>Store',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
+    'logo_img' => 'vendor/adminlte/dist/img/logo.jpg',
     'logo_img_class' => 'brand-image img-circle elevation-3',
     'logo_img_xl' => null,
     'logo_img_xl_class' => 'brand-image-xs',
@@ -268,6 +268,22 @@ return [
             'text' => 'Pesanan',
             'url'  => 'pesanan/index',
             'icon' => 'fas fa-shopping-cart',
+        ],
+        [
+            'text'    => 'Riwayat Pesanan',
+            'icon'    => 'fas fa-calendar-check',
+            'submenu' => [
+                [
+                    'text' => 'Cetak Pesanan',
+                    'url'  => 'riwayat',
+                    'icon' => 'fas fa-puzzle-piece',
+                ],
+                // [
+                //     'text' => 'Return',
+                //     'url'  => '#',
+                //     'icon'    => 'fas fa-puzzle-piece',
+                // ],
+            ],
         ],
         [
             'text'    => 'Laporan',
