@@ -82,6 +82,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('create/pesanan', [PesananController::class, 'create'])->name('pesanan.create');
     // Route::post('create/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
     Route::post('/pesanan', [PesananController::class, 'store'])->name('pesanan.store');
+    Route::get('/pesanan/cetak', [PesananController::class, 'cetakPesanan'])->name('pesanan.cetak');
 });
 
 
@@ -91,4 +92,7 @@ Route::prefix('/costumer')->name('costumer.')->namespace('Costumer')->group(func
     Route::post('/login', [CostumersController::class, 'login'])->name('login.post');
     Route::post('/logout', [CostumersController::class, 'logout'])->name('logout');
 });
+
+
+
 

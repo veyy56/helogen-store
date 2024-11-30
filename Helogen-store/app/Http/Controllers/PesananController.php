@@ -58,28 +58,5 @@ class PesananController extends Controller
         return redirect(route('pesanan.index'))->with('success', 'Produk Pesan Ditambahkan');
     }
 
-    public function destroy($id)
-    {
-        // Add your destroy logic here if needed
-    }
 
-    public function massUploadForm()
-    {
-        // Add your mass upload form logic here if needed
-    }
-
-    public function massUpload(Request $request)
-    {
-        // Add your mass upload logic here if needed
-    }
-
-    public function edit($id)
-    {
-        // Add your edit logic here if needed
-    }
-
-    public function update(Request $request, $id)
-    {
-        // Add your update logic here if needed
-    }
 }

@@ -259,48 +259,46 @@ return [
             'url'  => 'auth/product',
             'icon' => 'fas fa-box',
         ],
-        // [
-        //     'text' => 'Order',
-        //     'url'  => 'order/index',
-        //     'icon' => 'fas fa-shopping-cart',
-        // ],
+ 
         [
             'text' => 'Pesanan',
             'url'  => 'pesanan/index',
             'icon' => 'fas fa-shopping-cart',
         ],
-        [
-            'text'    => 'Riwayat Pesanan',
-            'icon'    => 'fas fa-calendar-check',
-            'submenu' => [
-                [
-                    'text' => 'Cetak Pesanan',
-                    'url'  => 'riwayat',
-                    'icon' => 'fas fa-puzzle-piece',
-                ],
-                // [
-                //     'text' => 'Return',
-                //     'url'  => '#',
-                //     'icon'    => 'fas fa-puzzle-piece',
-                // ],
-            ],
-        ],
-        [
-            'text'    => 'Laporan',
-            'icon'    => 'fas fa-calendar-check',
-            'submenu' => [
-                [
-                    'text' => 'Order',
-                    'url'  => 'order',
-                    'icon'    => 'fas fa-puzzle-piece',
-                ],
-                // [
-                //     'text' => 'Return',
-                //     'url'  => '#',
-                //     'icon'    => 'fas fa-puzzle-piece',
-                // ],
-            ],
-        ],
+        // [
+        //     'text'    => 'Riwayat Pesanan',
+        //     'icon'    => 'fas fa-calendar-check',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Cetak Pesanan',
+        //             'url'  => 'riwayat',
+        //             'icon' => 'fas fa-puzzle-piece',
+        //         ],
+        //         // [
+        //         //     'text' => 'Return',
+        //         //     'url'  => '#',
+        //         //     'icon'    => 'fas fa-puzzle-piece',
+        //         // ],
+        //     ],
+        // ],
+
+        // Reverensi untuk tanggal
+        // [
+        //     'text'    => 'Laporan',
+        //     'icon'    => 'fas fa-calendar-check',
+        //     'submenu' => [
+        //         [
+        //             'text' => 'Order',
+        //             'url'  => 'order',
+        //             'icon'    => 'fas fa-puzzle-piece',
+        //         ],
+        //         // [
+        //         //     'text' => 'Return',
+        //         //     'url'  => '#',
+        //         //     'icon'    => 'fas fa-puzzle-piece',
+        //         // ],
+        //     ],
+        // ],
 
     ],
 

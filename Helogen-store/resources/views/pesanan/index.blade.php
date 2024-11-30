@@ -21,9 +21,21 @@
                             <h4 class="card-title">
                                 Daftar Pesanan Pelanggan
                             </h4>
+                            
                             <div class="float-right">
                                 <a href="{{ route('pesanan.create') }}" class="btn btn-primary btn-sm">Tambah</a>
+                                <a href="{{ route('pesanan.cetak') }}" class="btn btn-danger btn-sm">Cetak PDF</a>
                             </div>
+                            <!-- Uji COba -->
+                            <!-- <form action="{{ route('pesanan.index') }}" method="get">
+                                <div class="input-group mb-3 col-md-4 float-right">
+                                    <input type="text" id="created_at" name="date" class="form-control">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-secondary" type="submit">Filter</button>
+                                    </div>
+                                    <a target="_blank" class="btn btn-primary ml-2" id="exportpdf">Export PDF</a>
+                                </div>
+                            </form> -->
                         </div>
                         <div class="card-body">
                             @if (session('success'))
@@ -52,19 +64,15 @@
                                         @forelse ($product as $row)
                                         <tr>
                                             <td style="text-align: center;">{{ $row->name }}</td>
-                                            <td style="text-align: center;">{{$row->category->name ?? 'N/A'}}</td>
+                                            <td style="text-align: center;">{{ $row->category->name ?? 'N/A' }}</td>
                                             <td style="text-align: center;">{{ $row->jumlah }}</td>
-                                            <td style="text-align: center;">Rp. {{number_format ($row->price) }}</span></td>
-                                            <td style="text-align: center;">{{$row->created_at->format('d-m-Y') }}</span></td>
-                                            <td style="text-align: center;">Rp. {{number_format ($row->total_harga) }}</span></td><br>
-                                            
+                                            <td style="text-align: center;">Rp. {{ number_format($row->price) }}</td>
+                                            <td style="text-align: center;">{{ $row->created_at->format('d-m-Y') }}</td>
+                                            <td style="text-align: center;">Rp. {{ number_format($row->total_harga) }}</td>
                                         </tr>
                                         @empty
                                             <td colspan="6" class="text-center">Tidak ada data</td>
-                                        </tr>
                                         @endforelse
-
-                                        
                                     </tbody>
                                 </table>
                             </div>
@@ -77,3 +85,23 @@
     </div>
 </main>
 @endsection
+@section('js')
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+    <script>
+        $(document).ready(function() {
+            let start = moment().startOf('month')
+            let end = moment().endOf('month')
+
+            $('#exportpdf').attr('href', 'order/pdf/' + start.format('YYYY-MM-DD') + '+' + end.format('YYYY-MM-DD'))
+
+            $('#created_at').daterangepicker({
+                startDate: start,
+                endDate: end
+            }, function(first, last) {
+                $('#exportpdf').attr('href', 'order/pdf/' + first.format('YYYY-MM-DD') + '+' + last.format('YYYY-MM-DD'))
+            })
+        })
+    </script>
+@endsection()

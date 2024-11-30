@@ -53,6 +53,7 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
+                                            
                                             <th>#</th>
                                             <th>Produk</th>
                                             <th>Harga</th>
