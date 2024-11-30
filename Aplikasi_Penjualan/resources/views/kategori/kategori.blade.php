@@ -31,19 +31,19 @@
                                     <input type="text" name="name" class="form-control" required>
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
                                 </div>
-                                <div class="form-group">
-                                    <label for="parent_id">Kategori</label>
+                                <!-- <div class="form-group">
+                                    <label for="parent_id">Kategori</label> -->
                                       <!-- VARIABLE $PARENT PADA METHOD INDEX KITA GUNAKAN DISINI -->
                                     <!-- UNTUK MENAMPILKAN DATA CATEGORY YANG PARENT_ID NYA NULL -->
                                     <!-- UNTUK DIPILIH SEBAGAI PARENT TAPI SIFATNYA OPTIONAL -->
-                                    <select name="parent_id" class="form-control">
+                                    <!-- <select name="parent_id" class="form-control">
                                         <option value="">None</option>
                                         @foreach ($parent as $row)
                                         <option value="{{ $row->id }}">{{ $row->name }}</option>
                                         @endforeach
                                     </select>
                                     <p class="text-danger">{{ $errors->first('name') }}</p>
-                                </div>
+                                </div> -->
                                 <div class="form-group">
                                     <button class="btn btn-primary btn-sm">Tambah</button>
                                 </div>
@@ -77,9 +77,9 @@
                                 <table class="table table-hover table-bordered">
                                     <thead>
                                         <tr>
-                                            <th>#</th>
+                                            <!-- <th>#</th> -->
                                             <th>Kategori</th>
-                                            <th>Parent</th>
+                                            <!-- <th>Parent</th> -->
                                             <th>Created At</th>
                                             <th>Aksi</th>
                                         </tr>
@@ -88,11 +88,11 @@
                                       	<!-- LOOPING DATA KATEGORI SESUAI JUMLAH DATA YANG ADA DI VARIABLE $CATEGORY -->
                                         @forelse ($category as $val)
                                         <tr>
-                                            <td></td>
+                                            <!-- <td></td> -->
                                             <td><strong>{{ $val->name }}</strong></td>
                                           
-                                          	<!-- MENGGUNAKAN TERNARY OPERATOR, UNTUK MENGECEK, JIKA $val->parent ADA MAKA TAMPILKAN NAMA PARENTNYA, SELAIN ITU MAKA TANMPILKAN STRING - -->
-                                            <td>{{ $val->parent ? $val->parent->name:'-' }}</td>
+                                         
+                                            <!-- <td>{{ $val->parent ? $val->parent->name:'-' }}</td> -->
                                           
                                             <!-- FORMAT TANGGAL KETIKA KATEGORI DIINPUT SESUAI FORMAT INDONESIA -->
                                             <td>{{ $val->created_at->format('d-m-Y') }}</td>
