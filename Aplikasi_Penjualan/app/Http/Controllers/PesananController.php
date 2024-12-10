@@ -26,7 +26,7 @@ class PesananController extends Controller
         $products = Pesanan::with(['category'])->orderBy('created_at', 'DESC')->get();
         
         $pdf = PDF::loadView('orders.order_pdf', compact('products'));
-        return $pdf->download('pesanan.pdf');
+        return $pdf->download('laporan-penjualan.pdf');
     }
 
 

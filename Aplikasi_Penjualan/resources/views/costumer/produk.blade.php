@@ -94,4 +94,5 @@ active
 
 @section('js')
     <script src="{{asset('assets/vendors/nice-select/jquery.nice-select.min.js')}}"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
 @endsection

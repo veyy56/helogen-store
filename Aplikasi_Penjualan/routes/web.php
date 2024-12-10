@@ -69,14 +69,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('order', [OrderController::class, 'viewOrder'])->name('report.order');
     Route::get('order/pdf/{daterange}', [OrderController::class, 'orderReportPdf'])->name('report.order_pdf');
     
-    // Laporan pdf
-    // Route::get('/riwayat', [RiwayatController::class, 'index'])->name('laporan.view');
-    // // Route::get('/riwayat/cetak_laporan', [RiwayatController::class, 'exportPdf'])->name('laporan.cetak_laporan');
-
-
-    
-    // Route::get('create/order', [OrderController::class, 'create'])->name('order.create');
-
     // Pesanan
     Route::get('pesanan/index', [PesananController::class, 'index'])->name('pesanan.index');
     Route::get('create/pesanan', [PesananController::class, 'create'])->name('pesanan.create');

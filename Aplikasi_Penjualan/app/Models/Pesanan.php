@@ -24,7 +24,7 @@ class Pesanan extends Model
 
     protected $guarded = [];
 
-    //SEDANGKAN INI ADALAH MUTATORS, PENJELASANNYA SAMA DENGAN ARTIKEL SEBELUMNYA
+    
     public function setSlugAttribute($value)
     {
         $this->attributes['slug'] = Str::slug($value);
