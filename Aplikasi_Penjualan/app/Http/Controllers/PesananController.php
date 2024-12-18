@@ -11,8 +11,11 @@ use PDF;
 
 class PesananController extends Controller
 {
+    
     public function index()
     {
+        // model pesanan yang terhubung dengan tabel pesanan didatabase
+        // mengambil data pesanan berdasarkan relasi kategori dan mengurutkan data berdasarkan produk yang baru dibuat
         $product = Pesanan::with(['category'])->orderBy('created_at', 'DESC');
         if (request()->q != '') {
             $product = $product->where('name', 'LIKE', '%' . request()->q . '%');

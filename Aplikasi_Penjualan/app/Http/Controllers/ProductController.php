@@ -50,13 +50,13 @@ class ProductController extends Controller
             //SIMPAN FILENYA KEDALAM FOLDER PUBLIC/PRODUCTS, DAN PARAMETER KEDUA ADALAH NAMA CUSTOM UNTUK FILE TERSEBUT
             $file->storeAs('public/products', $filename);
 
-            //SETELAH FILE TERSEBUT DISIMPAN, KITA SIMPAN INFORMASI PRODUKNYA KEDALAM DATABASE
+            //SETELAH FILE TERSEBUT DISIMPAN, kemudian SIMPAN INFORMASI PRODUKNYA KEDALAM DATABASE
             $product = Product::create([
                 'name' => $request->name,
                 'slug' => $request->name,
                 'category_id' => $request->category_id,
                 'description' => $request->description,
-                'image' => $filename, //PASTIKAN MENGGUNAKAN VARIABLE FILENAM YANG HANYA BERISI NAMA FILE SAJA (STRING)
+                'image' => $filename, //PASTIKAN MENGGUNAKAN VARIABLE FILENAME YANG HANYA BERISI NAMA FILE SAJA (STRING)
                 'price' => $request->price,
                 'weight' => $request->weight,
                 'stock' => $request->stock,

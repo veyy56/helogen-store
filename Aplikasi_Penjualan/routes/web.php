@@ -28,6 +28,10 @@ use App\Http\Controllers\RiwayatController;
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/produk', [FrontController::class, 'product'])->name('front.product');
 Route::get('/category/{slug}', [FrontController::class,'categoryProduct'])->name('front.category');
+// Search
+Route::get('/search', [FrontController::class, 'search'])->name('search');
+
+
 Route::get('/product/{slug}', [FrontController::class, 'show'])->name('front.show_product');
 Route::get('/contact', function () {
     return view('costumer.contact');
@@ -44,11 +48,17 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
 Route::group(['middleware' => ['auth']], function () {
 
     /* route product */
+    // Menampilkan daftar produk
     Route::get('auth/product', [ProductController::class, 'index'])->name('product.index');
+    // menampilkan formulir menambahkan produk
     Route::get('create/product', [ProductController::class, 'create'])->name('product.create');
+    // memproses data dari formulir produk baru ke database
     Route::post('create/product', [ProductController::class, 'store'])->name('product.store');
+    // menampilkan formulir edit produk
     Route::get('product/{product_id}/edit', [ProductController::class, 'edit'])->name('product.edit');
+    // melakukan update data dari formulir produk
     Route::put('product/{product_id}', [ProductController::class, 'update'])->name('product.update');
+    // menghapus data produk
     Route::delete('product/{product_id}', [ProductController::class, 'destroy'])->name('product.destroy');
 
     Route::get('product/bulk', [ProductController::class, 'massUploadForm'])->name('product.bulk');

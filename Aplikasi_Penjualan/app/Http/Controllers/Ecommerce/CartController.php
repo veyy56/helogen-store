@@ -91,13 +91,7 @@ class CartController extends Controller
         response()->json($cities);
     }
 
-    /*
-    public function getDistrict()
-    {
-        $districts = District::where('city_id', request()->city_id)->get();
-        return response()->json(['status' => 'success', 'data' => $districts]);
-    }
-    */
+    
 
 
     public function check_ongkir(Request $request){

@@ -7,14 +7,19 @@ use App\Models\Category;
 
 class CategoryController extends Controller
 {
+    // TERDAPAT Fungsi INDEX UNTUK TAMPILAN HALAMAN LIST KATEGORI
+    
     public function index()
     {
         $category = Category::with(['parent'])->orderBy('created_at', 'DESC')->paginate(10);
         $parent = Category::getParent()->orderBy('name', 'ASC')->get();
 
+        // variabel kategori berisi daftar kategori
         return view('kategori.kategori', compact('category', 'parent'));
     }
 
+    // TERDAPAT Fungsi STORE UNTUK MENAMBAHKAN KATEGORI BARU
+    // DAN REDIRECT KE HALAMAN LIST KATEGORI
     public function store(Request $request)
     {
         $this->validate($request, [

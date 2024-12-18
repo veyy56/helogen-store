@@ -30,10 +30,11 @@ active
       <div class="row">
         <div class="col-xl-3 col-lg-4 col-md-5">
           <div class="sidebar-categories">
-            <div class="head">Browse Categories</div>
+            <div class="head">Pilihan Kategori</div>
             <ul class="main-categories">
               <li class="common-filter">
                 <ul>
+                  
                     @foreach ($categories as $category)
                         <li class="filter-list">
                             <strong><a href="{{ url('/category/' . $category->slug) }}">{{ $category->name }}</a></strong>
@@ -54,10 +55,36 @@ active
         </div>
         <div class="col-xl-9 col-lg-8 col-md-7">
           
+          <!-- Start Filter Bar Masih Eror-->
+          <div class="filter-bar d-flex flex-wrap align-items-center">
+          <div class="container mt-5">
+    
+
+    <!-- Form Pencarian -->
+    <!-- <h2>Pencarian Produk</h2> -->
+    
+<form action="{{ route('search') }}" method="GET">
+<div class="input-group mb-5">
+    <input type="text" name="q" class="form-control" placeholder="Cari Produk..." value="{{ request()->q }}">
+    <div class="input-group-append">
+        <button class="btn btn-secondary" type="submit">Cari</button>
+    </div>
+</div>
+</form>
+
+
+    <!-- Hasil Pencarian -->
+    <ul id="result-list" class="list-group mt-3"></ul>
+</div>
+          <!-- End Filter Bar -->
+
           <!-- Start Best Seller -->
           <section class="lattest-product-area pb-40 category-list">
+            
             <div class="row">
+              
                 @forelse ($products as $row)
+                
                   <div class="col-md-6 col-lg-4">
                     <div class="card text-center card-product">
                       <div class="card-product__img">
@@ -80,7 +107,7 @@ active
 
                 @empty
                     <div class="col-md-12">
-                        <h3 class="text-center">Tidak ada produk</h3>
+                        <h4 class="text-center">Produk tidak ditemukan</h4>
                     </div>
                 @endforelse
             </div>
@@ -95,4 +122,6 @@ active
 @section('js')
     <script src="{{asset('assets/vendors/nice-select/jquery.nice-select.min.js')}}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+
+    
 @endsection
